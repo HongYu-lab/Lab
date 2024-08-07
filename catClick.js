@@ -1,90 +1,36 @@
 function catClick(svg) {
     svg.addEventListener("load", function () {
         const catfound = svg.contentDocument.querySelectorAll('[class^=catNum]');
-
-        // console.log(catfound);
-        // console.log(catfound[0].getAttribute("class").indexOsf("body"));
-        // catfound[0].setAttribute("fill", "#ffffff");
-        // let str = getFirstClass(catfound[5]);
-
-        // console.log(str);
-        // let temp = svg.contentDocument.querySelectorAll(`class=${str} body`);
-        // var list = svg.contentDocument.getElementsByClassName(`${str} body`)[0];
-        // setClassAttribute(str, "tail");
-        // list.setAttribute("fill", "#ffffff");
-        // console.log(list);
-
-
-        // var boo = catfound[5].getAttribute('class').indexOf("body"); // true
-        // console.log(boo);
-
-        // catfound[0].addEventListener("click", function () {
-
-        //     if (catfound[1])
-        //         catfound[1].setAttribute("fill", "#ffffff");
-        //     catfound[0].setAttribute("fill", "#ffffff");
-        // })
-        // for (let i=0;i<6;i++){
-
-        //     console.log(catfound[i]);
-        // }
+        for (let i = 0; i < catfound.length; i++) {
+            catfound[i].setAttribute("clicked", "0");
+        }
+        console.log(catfound[10].getAttribute("clicked"));
 
         for (let i = 0; i < catfound.length; i++) {
             catfound[i].addEventListener("click", function () {
-                if (hasBodyClass(catfound[i]) == 1) {
+                if ((hasBodyClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
                     let str = getFirstClass(catfound[i]);
-                    setClassAttribute(str, "tail", "#ffffff");
-                    catfound[i].setAttribute("fill", "#ffffff");
+                    let color = randomColor();
+                    setClassAttribute(str, "tail", color);
+                    catfound[i].setAttribute("fill", color);
+                    catfound[i].setAttribute("clicked", 1);
+                    console.log(catfound[i].getAttribute("clicked"));
                 }
-                else if (hasTailClass(catfound[i]) == 1) {
+                else if ((hasTailClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
                     let str = getFirstClass(catfound[i]);
-                    setClassAttribute(str, "body", "#ffffff");
-                    catfound[i].setAttribute("fill", "#ffffff");
+                    let color = randomColor();
+                    setClassAttribute(str, "body", color);
+                    catfound[i].setAttribute("fill", color);
+                    catfound[i].setAttribute("clicked", 1);
+                    console.log(catfound[i].getAttribute("clicked"));
                 }
-                else {
-                    catfound[i].setAttribute("fill", "#ffffff");
-                    console.log("entire")
+                else if (catfound[i].getAttribute("clicked") != 1) {
+                    catfound[i].setAttribute("fill", randomColor());
+                    catfound[i].setAttribute("clicked", 1);
+                    console.log(catfound[i].getAttribute("clicked"));
                 }
             })
         }
-        // for (let i = 0; i < 100; i++) {
-        //     catfound[i].addEventListener("click", function () {
-        //         if (catfound[i].getAttribute("class").indexOf("body")) {
-        //             let str = catfound[0].getAttribute("class").split(" ")[0];
-        //             svg.contentDocument.getElementsByClassName(`${str} tail`)[0].setAttribute("fill", "#ffffff");
-        //             catfound[i].setAttribute("fill", "#ffffff");
-        //         }
-        //         else if (catfound[i].getAttribute("class").indexOf("tail")) {
-        //             let str = catfound[0].getAttribute("class").split(" ")[0];
-        //             svg.contentDocument.getElementsByClassName(`${str} body`)[0].setAttribute("fill", "#ffffff");
-        //             catfound[i].setAttribute("fill", "#ffffff");
-        //         }
-        //         else
-        //             catfound[i].setAttribute("fill", "#ffffff");
-
-        //         catfound[i].setAttribute("flag", 1);
-        //         // console.log(catfound);
-        //     })
-        // }
-
-        // catfound.addEventListener("click", function () {
-        //     catfound.setAttribute("fill", "#ffffff");
-        //     catfound.setAttribute("flag", 0);
-        // })
-        // const catfound1 = svg.contentDocument.getElementById("catNum1");
-        // catfound1.addEventListener("click", function () {
-        //     catfound[1].setAttribute("fill", "#ffffff");
-        //     catfound[1].setAttribute("flag", 1);
-        //     // console.log(catfound);
-        // })
-
-
-        // const catfound2 = svg.contentDocument.getElementById("catNum2");
-        // catfound2.addEventListener("click", function () {
-        //     catfound2.setAttribute("fill", "#FFEBA2");
-        //     catfound2.setAttribute("flag", 0);
-        //     // console.log(svg.contentDocument.getElementById("catsSVG").getAttribute("viewBox"));
-        // })
     });
 }
 function getFirstClass(elem) {
@@ -109,10 +55,38 @@ function hasTailClass(elem) {
 function setClassAttribute(elem, name, color) {
     let temp = svg.contentDocument.getElementsByClassName(`${elem} ${name}`)[0];
     temp.setAttribute("fill", color);
-    // console.log(typeof (temp));
-    // return temp;
+    temp.setAttribute("clicked", 1);
 }
 
+function randomColor() {
+    //  #FFEBA2 1~10
+    //  #31AE3D 11~20
+    //  #BAAFFF 21~30
+    //  #49EEF9 31~40
+    //  #F8B5F1 41~50
+    //  #8CFFC8 51~60
+    //  #BAC9FF 61~70
+    //  #FFA14A 71~80
+    //  #A3C3DA 81~90
+    //  #FFCBCB 91~100
+
+    let a = Math.floor((Math.random() * 10) % 10);
+    let color;
+    switch (a) {
+        case 1: color = "#FFEBA2"; break;
+        case 2: color = "#31AE3D"; break;
+        case 3: color = "#BAAFFF"; break;
+        case 4: color = "#49EEF9"; break;
+        case 5: color = "#F8B5F1"; break;
+        case 6: color = "#8CFFC8"; break;
+        case 7: color = "#BAC9FF"; break;
+        case 8: color = "#FFA14A"; break;
+        case 9: color = "#A3C3DA"; break;
+        case 0: color = "#FFCBCB"; break;
+        default: break;
+    }
+    return color;
+}
 
 function drag(svg) {
     svg.addEventListener("load", function (e) {
