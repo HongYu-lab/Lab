@@ -1,16 +1,67 @@
 function catClick(svg) {
     svg.addEventListener("load", function () {
-        const catfound = svg.contentDocument.querySelectorAll('[id^=catNum]');
+        const catfound = svg.contentDocument.querySelectorAll('[class^=catNum]');
 
-        // catfound[53].addEventListener("click", function () {
+        // console.log(catfound);
+        // console.log(catfound[0].getAttribute("class").indexOsf("body"));
+        // catfound[0].setAttribute("fill", "#ffffff");
+        // let str = getFirstClass(catfound[5]);
 
-        //     catfound[53].setAttribute("fill", "#ffffff");
-        //     console.log(catfound);
+        // console.log(str);
+        // let temp = svg.contentDocument.querySelectorAll(`class=${str} body`);
+        // var list = svg.contentDocument.getElementsByClassName(`${str} body`)[0];
+        // setClassAttribute(str, "tail");
+        // list.setAttribute("fill", "#ffffff");
+        // console.log(list);
+
+
+        // var boo = catfound[5].getAttribute('class').indexOf("body"); // true
+        // console.log(boo);
+
+        // catfound[0].addEventListener("click", function () {
+
+        //     if (catfound[1])
+        //         catfound[1].setAttribute("fill", "#ffffff");
+        //     catfound[0].setAttribute("fill", "#ffffff");
         // })
+        // for (let i=0;i<6;i++){
 
-        // for (let i = 0; i < 60; i++) {
+        //     console.log(catfound[i]);
+        // }
+
+        for (let i = 0; i < catfound.length; i++) {
+            catfound[i].addEventListener("click", function () {
+                if (hasBodyClass(catfound[i]) == 1) {
+                    let str = getFirstClass(catfound[i]);
+                    setClassAttribute(str, "tail", "#ffffff");
+                    catfound[i].setAttribute("fill", "#ffffff");
+                }
+                else if (hasTailClass(catfound[i]) == 1) {
+                    let str = getFirstClass(catfound[i]);
+                    setClassAttribute(str, "body", "#ffffff");
+                    catfound[i].setAttribute("fill", "#ffffff");
+                }
+                else {
+                    catfound[i].setAttribute("fill", "#ffffff");
+                    console.log("entire")
+                }
+            })
+        }
+        // for (let i = 0; i < 100; i++) {
         //     catfound[i].addEventListener("click", function () {
-        //         catfound[i].setAttribute("fill", "#ffffff");
+        //         if (catfound[i].getAttribute("class").indexOf("body")) {
+        //             let str = catfound[0].getAttribute("class").split(" ")[0];
+        //             svg.contentDocument.getElementsByClassName(`${str} tail`)[0].setAttribute("fill", "#ffffff");
+        //             catfound[i].setAttribute("fill", "#ffffff");
+        //         }
+        //         else if (catfound[i].getAttribute("class").indexOf("tail")) {
+        //             let str = catfound[0].getAttribute("class").split(" ")[0];
+        //             svg.contentDocument.getElementsByClassName(`${str} body`)[0].setAttribute("fill", "#ffffff");
+        //             catfound[i].setAttribute("fill", "#ffffff");
+        //         }
+        //         else
+        //             catfound[i].setAttribute("fill", "#ffffff");
+
         //         catfound[i].setAttribute("flag", 1);
         //         // console.log(catfound);
         //     })
@@ -20,12 +71,12 @@ function catClick(svg) {
         //     catfound.setAttribute("fill", "#ffffff");
         //     catfound.setAttribute("flag", 0);
         // })
-        const catfound1 = svg.contentDocument.getElementById("catNum1");
-        catfound1.addEventListener("click", function () {
-            catfound[1].setAttribute("fill", "#ffffff");
-            catfound[1].setAttribute("flag", 1);
-            // console.log(catfound);
-        })
+        // const catfound1 = svg.contentDocument.getElementById("catNum1");
+        // catfound1.addEventListener("click", function () {
+        //     catfound[1].setAttribute("fill", "#ffffff");
+        //     catfound[1].setAttribute("flag", 1);
+        //     // console.log(catfound);
+        // })
 
 
         // const catfound2 = svg.contentDocument.getElementById("catNum2");
@@ -36,6 +87,32 @@ function catClick(svg) {
         // })
     });
 }
+function getFirstClass(elem) {
+    let str = elem.getAttribute("class").split(" ")[0];
+    return str;
+}
+
+function hasBodyClass(elem) {
+    let boo = elem.getAttribute('class').indexOf("body");
+    if (boo > -1)
+        return 1;
+    else
+        return -1;
+}
+function hasTailClass(elem) {
+    let boo = elem.getAttribute('class').indexOf("tail");
+    if (boo > -1)
+        return 1;
+    else
+        return -1;
+}
+function setClassAttribute(elem, name, color) {
+    let temp = svg.contentDocument.getElementsByClassName(`${elem} ${name}`)[0];
+    temp.setAttribute("fill", color);
+    // console.log(typeof (temp));
+    // return temp;
+}
+
 
 function drag(svg) {
     svg.addEventListener("load", function (e) {
