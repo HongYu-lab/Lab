@@ -18,31 +18,23 @@
 
 <body>
 
-    <!-- #FFEBA2 1~10-->
-    <!-- #31AE3D 11~20-->
-    <!-- #BAAFFF 21~30-->
-    <!-- #49EEF9 31~40-->
-    <!-- #F8B5F1 41~50-->
-    <!-- #8CFFC8 51~60-->
-    <!-- #5772D4 61~70-->
-    <!-- #FFA14A 71~80-->
-    <!-- #A3C3DA 81~90-->
-    <!-- #FFCBCB 91~100-->
-
-    <!-- <object data="../part4.svg" id="test"></object> -->
     <section style="position: absolute;">
         <div style="border: 2px solid black;">
             <object data="./catsSVG.svg" id="catsSVG"></object>
         </div>
+        <p id="timer"></p>
+        <p id="catRemain"></p>
     </section>
 
     <script>
         const svg = document.getElementById("catsSVG");
+
+        // countdown = catClick(svg);
+        // console.log(countdown);
         catClick(svg);
+        
 
-        drag(svg);
 
-        zoom(svg);
 
 
 
