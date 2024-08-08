@@ -7,7 +7,7 @@
     <title>Document</title>
 
     <script src="./catClick.js"></script>
-    <link rel="stylesheet" href="../catCss.css">
+    <link rel="stylesheet" href="./catCss.css">
     <style>
 
 
@@ -16,25 +16,21 @@
 </head>
 
 
-<body>
+<body class="cursorChange">
 
     <section style="position: absolute;">
         <div style="border: 2px solid black;">
-            <object data="./catsSVG.svg" id="catsSVG"></object>
+            <object data="./catsSVG.svg" id="catsSVG"  ></object>
         </div>
-        <p id="timer"></p>
-        <p id="catRemain"></p>
+        <span id="timer"></span>
+        <span id="catRemain"></span>
+        <div id="hint" class="hint"></div>
     </section>
 
     <script>
         const svg = document.getElementById("catsSVG");
-
-        // countdown = catClick(svg);
-        // console.log(countdown);
         catClick(svg);
-        
-
-
+  
 
 
 

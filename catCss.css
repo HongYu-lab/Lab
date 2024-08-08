@@ -1,0 +1,15 @@
+.invisible {
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
+}
+
+.hint {
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+    visibility: hidden;
+}
+
