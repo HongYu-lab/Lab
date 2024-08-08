@@ -21,7 +21,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     document.getElementById("catRemain").innerHTML = `還剩下: ${countdown}隻`;
-
+                    if (countdown == 0)
+                        alert("AAAA");
                     // console.log(countdown);
                 }
                 else if ((hasTailClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
@@ -32,6 +33,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     document.getElementById("catRemain").innerHTML = `還剩下: ${countdown}隻`;
+                    if (countdown == 0)
+                        alert("AAAA");
 
                     // console.log(countdown);
                 }
@@ -40,6 +43,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     document.getElementById("catRemain").innerHTML = `還剩下: ${countdown}隻`;
+                    if (countdown == 0)
+                        alert("AAAA");
 
                     // console.log(countdown);
                 }
@@ -49,12 +54,16 @@ function catClick(svg) {
         }
         //計時器
         let i = 0;
-        let timevoer = 0;
+        let timeover = 0;
         while (i < 10000) {
             (function (i) {
                 setTimeout(function () {
-                    if (countdown == 0)
-                        timevoer = 1;
+                    if (countdown == 0) {
+                        // for (let i = 0; i < catfound.length; i++) {
+                        //     catfound[i].setAttribute("fill", "#DC803C");
+                        // }
+                        timeover = 1;
+                    }
                     else {
                         document.getElementById("timer").innerHTML = `計時已過: ${i}秒`;
                         // console.log(countdown);  
@@ -63,7 +72,7 @@ function catClick(svg) {
                     }
                 }, 1000 * i)
             })(i++)
-            if (timevoer == 1)
+            if (timeover == 1)
                 break;
         }
         drag(catsSVG);
@@ -84,8 +93,7 @@ function hint(catfound) {
         console.log(getFirstClass(check[a]));
         // check[a].setAttribute("fill", color);
         flash(check[a]);
-        while(check.length)
-        {
+        while (check.length) {
             check.pop();
         }
     });

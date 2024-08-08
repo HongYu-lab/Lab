@@ -10,19 +10,32 @@
     <link rel="stylesheet" href="./catCss.css">
     <style>
 
-
     </style>
 
 </head>
 
 
-<body class="cursorChange">
+<body style="background-color: aquamarine;">
 
     <section style="position: absolute;">
-        <div style="border: 2px solid black;">
-            <object data="./catsSVG.svg" id="catsSVG"  ></object>
+        <div style="border: 2px solid black; position: absolute; left: 26px; top: 10px;">
+            <object data="./catsSVG.svg" id="catsSVG" ></object>
+            <!-- <img style="position: absolute; left: 43% ;bottom: 0;" src="./counterBg.svg"> -->
+            <div id = "countBgColor"></div>
+            <img id="catIcon"  src="./catIcon.svg">
+            <!-- <img class="num" src="./num9.svg"> -->
+            <!-- <img class="num" src="./num8.svg">
+            <img class="num" src="./num7.svg">
+            <img class="num" src="./num6.svg">
+            <img class="num" src="./num5.svg">
+            <img class="num" src="./num4.svg">
+            <img class="num" src="./num3.svg">
+            <img class="num" src="./num2.svg"> -->
+            <img class="num1" src="./num1.svg">
+            <img class="num2" src="./num0.svg">
+            <img class="num3" src="./num0.svg">
         </div>
-        <span id="timer"></span>
+        <div id="timer"></div>
         <span id="catRemain"></span>
         <div id="hint" class="hint"></div>
     </section>
@@ -30,10 +43,6 @@
     <script>
         const svg = document.getElementById("catsSVG");
         catClick(svg);
-  
-
-
-
     </script>
 </body>
 

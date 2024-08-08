@@ -13,3 +13,34 @@
     visibility: hidden;
 }
 
+#countBgColor {
+    position: absolute;
+    left: 780px;
+    bottom: 20px;
+    width: 250px;
+    height: 75px;
+    background-color: #9f9f9f;
+    opacity: 0.5;
+}
+
+#catIcon {
+    position: absolute;
+    left: 805px;
+    bottom: 35px;
+}
+
+.num1 {
+    position: absolute;
+    left: 855px;
+    bottom: 35px;
+}
+.num2 {
+    position: absolute;
+    left: 905px;
+    bottom: 35px;
+}
+.num3 {
+    position: absolute;
+    left: 955px;
+    bottom: 35px;
+}
