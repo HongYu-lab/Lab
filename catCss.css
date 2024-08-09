@@ -1,26 +1,37 @@
+body {
+    background-image: url("./images/backGroungImage.png");
+    background-attachment: fixed;
+    background-position: top right;
+
+}
+
 .invisible {
-    visibility: hidden;
+    visibility: visible;
+}
+
+#mainView {
+    position: absolute;
+    left: 28px;
+    top: 13px;
 }
 
 .show {
     visibility: visible;
 }
 
-.hint {
-    width: 100px;
-    height: 100px;
-    background-color: aquamarine;
+#hintCombine {
     visibility: hidden;
 }
 
 #countBgColor {
     position: absolute;
-    left: 780px;
+    left: 790px;
     bottom: 20px;
-    width: 250px;
+    width: 230px;
     height: 75px;
     background-color: #9f9f9f;
     opacity: 0.5;
+    border-radius: 25px;
 }
 
 #catIcon {
@@ -29,18 +40,81 @@
     bottom: 35px;
 }
 
+#timerBgColor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 180px;
+    height: 60px;
+    background-color: #9f9f9f;
+    opacity: 0.5;
+    border-radius: 25px 0 25px 0;
+}
+
+#hintBgColor {
+    position: absolute;
+    background-color: #9f9f9f;
+    opacity: 0.5;
+    width: 65px;
+    height: 65px;
+    left: 874px;
+    bottom: 95px;
+    border-radius: 25px 25px 0 0;
+}
+
+#timerIcon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
 .num1 {
     position: absolute;
-    left: 855px;
+    left: 860px;
     bottom: 35px;
 }
+
 .num2 {
     position: absolute;
-    left: 905px;
+    left: 910px;
     bottom: 35px;
 }
+
 .num3 {
     position: absolute;
-    left: 955px;
+    left: 960px;
     bottom: 35px;
+}
+
+.timer1 {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+}
+
+.timer2 {
+    position: absolute;
+    top: 10px;
+    left: 85px;
+}
+
+.timer3 {
+    position: absolute;
+    top: 10px;
+    left: 125px;
+}
+
+#hint {
+    position: absolute;
+    left: 878px;
+    bottom: 95px;
+}
+
+#hint:hover {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    left: 876px;
+    bottom: 97px;
 }
