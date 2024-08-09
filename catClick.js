@@ -52,7 +52,7 @@ function catClick(svg) {
         //計時器
         let i = 0;
         let timeover = 0;
-        while (i < 10000) {
+        while (i < 1000) {
             (function (i) {
                 setTimeout(function () {
                     if (countdown == 0) {
@@ -76,7 +76,17 @@ function catClick(svg) {
         drag(catsSVG);
         zoom(catsSVG);
         hint(catfound);
+        clickSetting();
     });
+}
+function clickSetting(){
+    let settingIcon= document.getElementById("settingIcon");
+    let settings = document.getElementById("settings");
+    settingIcon.addEventListener("click",function(){
+        settings.style.visibility="visible";
+        settings.setAttribute("class", "mainView slideIn animate__animated slide");
+    })
+
 }
 function showHint() {
     document.getElementById("hintCombine").style.visibility = "visible";

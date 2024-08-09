@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="author" content="Hong Yu">
+    <meta name="description" content="Free game for finding 100 cats.">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <link rel="icon" href="./images/catIcon.svg">
+
+    <title>100 Cat</title>
 
     <script src="./catClick.js"></script>
     <link rel="stylesheet" href="./catCss.css">
@@ -18,7 +23,7 @@
 <body style="background-color: aquamarine;">
 
     <section style="position: absolute;">
-        <div id="mainView">
+        <div class="mainView">
             <object data="./images/catsSVG.svg" id="catsSVG" style="border-radius: 25px;"></object>
             <div id="countBgColor"></div>
             <img id="catIcon" src="./images/catIcon.svg">
@@ -35,6 +40,17 @@
                 <img id="hint" src="./images/hintIcon.svg">
             </div>
             <img id="settingIcon" src="./images/settingIcon.svg">
+        </div>
+    </section>
+
+    <section style="position: absolute;">
+        <div id="settings" class="mainView">
+            <div
+                style="width: 1850px;height: 900px; background-color: rgb(37, 150, 150);border-radius: 25px; opacity: 0.5; position: absolute; left: 0; top: 0;">
+            </div>
+            <div
+                style="position: absolute;width: 500px;height: 200px ;left: 300px;top:200px; background-color: rgb(108, 108, 219);">
+            </div>
         </div>
     </section>
 

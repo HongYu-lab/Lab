@@ -8,10 +8,13 @@ body {
     visibility: visible;
 }
 
-#mainView {
+.mainView {
     position: absolute;
     left: 28px;
     top: 13px;
+    width: 1850px;
+    height: 900px;
+    overflow: hidden;
 }
 
 .show {
@@ -19,6 +22,10 @@ body {
 }
 
 #hintCombine {
+    visibility: hidden;
+}
+
+#settings {
     visibility: hidden;
 }
 
@@ -155,8 +162,12 @@ body {
     animation-duration: 4s;
     animation-fill-mode: both;
     animation-timing-function: linear;
-
 }
+
+.animate__animated.slide {
+    animation-duration: 0.5s;
+}
+
 
 @keyframes rotate {
     from {
@@ -174,4 +185,19 @@ body {
 
 .animate__animated.infinite {
     animation-iteration-count: infinite;
+}
+
+
+.slideIn {
+    animation-name: slideDown;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(0, -900px);
+    }
+
+    to {
+        transform: translate(-0, 0);
+    }
 }
