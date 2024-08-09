@@ -12,9 +12,9 @@ function catClick(svg) {
             catfound[i].addEventListener("click", function () {
                 // 點到本體也要把尾巴算進去
                 if ((hasBodyClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
-                    let str = getFirstClass(catfound[i]);
+                    let className = getFirstClass(catfound[i]);
                     let color = randomColor();
-                    setClassAttribute(str, "tail", color);
+                    setClassAttribute(className, "tail", color);
                     catfound[i].setAttribute("fill", color);
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
@@ -24,9 +24,9 @@ function catClick(svg) {
                     // console.log(countdown);
                 }
                 else if ((hasTailClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
-                    let str = getFirstClass(catfound[i]);
+                    let className = getFirstClass(catfound[i]);
                     let color = randomColor();
-                    setClassAttribute(str, "body", color);
+                    setClassAttribute(className, "body", color);
                     catfound[i].setAttribute("fill", color);
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
@@ -62,10 +62,11 @@ function catClick(svg) {
                         // }
                         timeover = 1;
                     }
-                    else {                     
+                    else {
                         printTimer(i);
-                        if (i == 2)
-                            document.getElementById("hintCombine").style.visibility = "visible";
+                        if (i == 5)
+                            showHint();
+                        // document.getElementById("hintCombine").style.visibility = "visible";
                     }
                 }, 1000 * i)
             })(i++)
@@ -76,6 +77,10 @@ function catClick(svg) {
         zoom(catsSVG);
         hint(catfound);
     });
+}
+function showHint() {
+    document.getElementById("hintCombine").style.visibility = "visible";
+    document.getElementById("hintCombine").setAttribute("class", "animateFadeInUp animate__animated");
 }
 function printCountdown(countdown) {
     let firsrtDigit = Math.floor(countdown / 100);
@@ -119,7 +124,6 @@ function numImages(num) {
     }
     return srcString;
 }
-
 function hint(catfound) {
     let hint = document.getElementById("hint");
     let check = [];
@@ -129,24 +133,38 @@ function hint(catfound) {
                 check.push(catfound[i]);
         }
         let a = Math.floor((Math.random() * 100) % check.length);
-        console.log(getFirstClass(check[a]));
-        // check[a].setAttribute("fill", color);
-        flash(check[a]);
+
+        if (hasBodyClass(check[a]) == 1) {
+            let className = getFirstClass(check[a]);
+            let tail = svg.contentDocument.getElementsByClassName(`${className} tail`)[0];
+            flash(check[a]);
+            flash(tail);
+        }
+        else if (hasTailClass(check[a]) == 1) {
+            let className = getFirstClass(check[a]);
+            let body = svg.contentDocument.getElementsByClassName(`${className} body`)[0];
+            flash(check[a]);
+            flash(body);
+        }
+        else {
+            flash(check[a]);
+        }
         while (check.length) {
             check.pop();
         }
     });
 }
+
 function flash(check) {
     let color = "#47473F"
     let flag = 0;
     let i = 0;
     while (i < 6) {
         (function (i) {
-
             setTimeout(function () {
                 if (flag == 0) {
                     check.setAttribute("fill", color);
+
                     flag = 1;
                 }
                 else {
@@ -178,8 +196,8 @@ function hasTailClass(elem) {
     else
         return -1;
 }
-function setClassAttribute(elem, name, color) {
-    let temp = svg.contentDocument.getElementsByClassName(`${elem} ${name}`)[0];
+function setClassAttribute(className, name, color) {
+    let temp = svg.contentDocument.getElementsByClassName(`${className} ${name}`)[0];
     temp.setAttribute("fill", color);
     temp.setAttribute("clicked", 1);
 }
@@ -254,6 +272,7 @@ function drag(catsSVG) {
     //drag 拖曳
     let moving;
     catsSVG.addEventListener("mousedown", function (e) {
+        catsSVG.style.cursor="grab";
         moving = true;
     });
     catsSVG.addEventListener("mousemove", function (e) {
@@ -312,5 +331,16 @@ function drag(catsSVG) {
     });
     catsSVG.addEventListener("mouseup", function (e) {
         moving = false;
+        catsSVG.style.cursor="auto";
     });
+}
+
+function settingRotate() {
+    temp = document.getElementById("settingIcon");
+    temp.addEventListener("mouseenter", function (e) {
+        temp.setAttribute("class", "rotateSetting animate__animated infinite");
+    })
+    temp.addEventListener("mouseout", function (e) {
+        temp.setAttribute("class", "");
+    })
 }
