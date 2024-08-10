@@ -2,6 +2,7 @@ function catClick(svg) {
     svg.addEventListener("load", function () {
         const catfound = svg.contentDocument.querySelectorAll('[class^=catNum]');//used by clickEvent
         const catsSVG = svg.contentDocument.getElementById("catsSVG"); //used by drag and zoom
+        const hintCombine = document.getElementById("hintCombine");
         const settingIcon = document.getElementById("settingIcon");//開啟右上角"暫停(設定)"的按鍵
         const closeBtn = document.getElementById("closeBtn");//關閉"暫停(設定)"的按鍵
         const settings = document.getElementById("settings");//整個設定主體
@@ -41,7 +42,7 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 0)
+                    if (countdown == 90)
                         alert("AAAA");
                     // console.log(countdown);
                 }
@@ -53,7 +54,7 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 0)
+                    if (countdown == 90)
                         alert("AAAA");
                     // console.log(countdown);
                 }
@@ -62,7 +63,7 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 0)
+                    if (countdown == 90)
                         alert("AAAA");
                     // console.log(countdown);
                 }
@@ -87,11 +88,15 @@ function catClick(svg) {
             pause = 0;
         });
 
-        //設定重新遊玩事件
+        //設定重新遊玩事件 ==>將各個設定返回初始值
         retryBtn.addEventListener("click", function () {
             retryFlag = 1;
             startFlag = 0;
             pause = 0;
+            countdown = 100;
+            printCountdown(countdown);
+            hintCombine.style.visibility = "hidden";
+            hintCombine.setAttribute("class", "");
             settings.setAttribute("class", "FadeOut animate__animated veryfast linear");
             start.setAttribute("class", "FadeIn animate__animated  faster linear");
             startView.setAttribute("class", "startIn animate__animated  faster linear");
@@ -99,7 +104,6 @@ function catClick(svg) {
             for (let i = 0; i < catfound.length; i++) {
                 catfound[i].setAttribute("clicked", "0");
                 catfound[i].setAttribute("fill", "#ffffff");
-                countdown = 100;
             }
         });
 
@@ -118,7 +122,7 @@ function catClick(svg) {
         while (i < 9999) {
             (function (i) {
                 setTimeout(function () {
-                    if (countdown == 0) {
+                    if (countdown == 90) {
                         //作弊碼
                         // for (let i = 0; i < catfound.length; i++) {
                         //     catfound[i].setAttribute("fill", "#DC803C");
@@ -152,8 +156,8 @@ function catClick(svg) {
 
 
 function showHint() {
-    document.getElementById("hintCombine").style.visibility = "visible";
-    document.getElementById("hintCombine").setAttribute("class", "animateFadeIn animate__animated  linear");
+    hintCombine.style.visibility = "visible";
+    hintCombine.setAttribute("class", "animateFadeIn animate__animated  linear");
 }
 function printCountdown(countdown) {
     if (countdown < 1000) {
