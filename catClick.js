@@ -11,6 +11,7 @@ function catClick(svg) {
         const retryBtn = document.getElementById("retryBtn");//重啟按鈕
         const startBackground = document.getElementById("startBackground");//開始背景
         const startView = document.getElementById("startView");//開始頁面中間的介面
+        const cheatBtn = document.getElementById("cheatBtn");
 
 
         let countdown = 100;
@@ -30,6 +31,18 @@ function catClick(svg) {
         for (let i = 0; i < catfound.length; i++) {
             catfound[i].setAttribute("clicked", "0");
         }
+
+        //設定作弊skip按鍵
+        cheatBtn.addEventListener("click", function () {
+            for (let i = 0; i < catfound.length; i++) {
+                catfound[i].setAttribute("clicked", "1");
+                catfound[i].setAttribute("fill", randomColor());
+            }
+            catfound[7].setAttribute("clicked", "0");
+            catfound[7].setAttribute("fill", "#ffffff");
+            countdown = 1;
+            printCountdown(countdown);
+        });
         // 點擊事件
         for (let i = 0; i < catfound.length; i++) {
             catfound[i].addEventListener("click", function () {
@@ -42,8 +55,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 90)
-                        alert("AAAA");
+                    if (countdown == 0)
+                        console.log("win!");
                     // console.log(countdown);
                 }
                 else if ((hasTailClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
@@ -54,8 +67,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 90)
-                        alert("AAAA");
+                    if (countdown == 0)
+                        console.log("win!");
                     // console.log(countdown);
                 }
                 else if (catfound[i].getAttribute("clicked") != 1) {
@@ -63,8 +76,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (countdown == 90)
-                        alert("AAAA");
+                    if (countdown == 0)
+                        console.log("win!");
                     // console.log(countdown);
                 }
                 else
@@ -122,11 +135,7 @@ function catClick(svg) {
         while (i < 9999) {
             (function (i) {
                 setTimeout(function () {
-                    if (countdown == 90) {
-                        //作弊碼
-                        // for (let i = 0; i < catfound.length; i++) {
-                        //     catfound[i].setAttribute("fill", "#DC803C");
-                        // }
+                    if (countdown == 0) {
                         timeover = 1;
                     }
 

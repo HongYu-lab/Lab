@@ -234,6 +234,7 @@ body {
     bottom: 100px;
     cursor: pointer;
 }
+
 #closeBtn:hover {
     position: absolute;
     width: 110px;
@@ -289,6 +290,7 @@ body {
     cursor: pointer;
 }
 
+
 #volumeBar1 {
     position: absolute;
     width: 300px;
@@ -311,6 +313,16 @@ body {
     right: 20px;
     top: 30px;
 }
+
+#cheatBtn {
+    position: absolute;
+    width: 60px;
+    right: 20px;
+    top: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
 
 #HackMDIcon {
     position: absolute;
