@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <span id="d01"></span>
+    <script>
+        var myFunc01 = function () {
+            var i = 0;
+            while (i < 100) {
+                (function (i) {
+                    setTimeout(function () {
+                        document.getElementById('d01').innerHTML += 100 - i + "<br>";
+                    }, 1000 * i)
+                })(i++)
+            }
+        };
+
+        myFunc01();
+    </script>
 </body>
+
 </html>

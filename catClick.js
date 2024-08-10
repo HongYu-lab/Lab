@@ -2,7 +2,29 @@ function catClick(svg) {
     svg.addEventListener("load", function () {
         const catfound = svg.contentDocument.querySelectorAll('[class^=catNum]');//used by clickEvent
         const catsSVG = svg.contentDocument.getElementById("catsSVG"); //used by drag and zoom
+        const settingIcon = document.getElementById("settingIcon");//開啟右上角"暫停(設定)"的按鍵
+        const closeBtn = document.getElementById("closeBtn");//關閉"暫停(設定)"的按鍵
+        const settings = document.getElementById("settings");//整個設定主體
+        const startBtn = document.getElementById("startBtn"); //開始按鍵
+        const start = document.getElementById("start");//整個開始頁面
+        const retryBtn = document.getElementById("retryBtn");//重啟按鈕
+        const startBackground = document.getElementById("startBackground");//開始背景
+        const startView = document.getElementById("startView");//開始頁面中間的介面
+
+
         let countdown = 100;
+        let pause = 0;
+        let startFlag = 0;
+        let retryFlag = 0;
+
+        // 開始按鈕
+        startBtn.addEventListener("click", function () {
+            startFlag = 1;
+            retryFlag = 0;
+            start.setAttribute("class", "animateFadeOut animate__animated  linear faster");
+            startView.setAttribute("class", "startOut animate__animated  linear slide");
+        })
+
         //設定全部未點擊 clicked = 0
         for (let i = 0; i < catfound.length; i++) {
             catfound[i].setAttribute("clicked", "0");
@@ -42,17 +64,58 @@ function catClick(svg) {
                     printCountdown(countdown);
                     if (countdown == 0)
                         alert("AAAA");
-
                     // console.log(countdown);
                 }
                 else
                     console.log("點過了別再點了QQ");
             });
         }
-        //計時器
+
+
+        //暫停點擊事件
+        settingIcon.addEventListener("click", function () {
+
+            settings.style.visibility = "visible";
+            settings.setAttribute("class", "slideIn animate__animated slide linear");
+            pause = 1;
+            // console.log(pause);
+
+        });
+        //設定關閉按鈕點擊事件
+        closeBtn.addEventListener("click", function () {
+            settings.setAttribute("class", "slideOut animate__animated slide  linear");
+            pause = 0;
+        });
+
+        //設定重新遊玩事件
+        retryBtn.addEventListener("click", function () {
+            retryFlag = 1;
+            startFlag = 0;
+            pause = 0;
+            settings.setAttribute("class", "FadeOut animate__animated veryfast linear");
+            start.setAttribute("class", "FadeIn animate__animated  faster linear");
+            startView.setAttribute("class", "startIn animate__animated  faster linear");
+            //設回未點擊狀態
+            for (let i = 0; i < catfound.length; i++) {
+                catfound[i].setAttribute("clicked", "0");
+                catfound[i].setAttribute("fill", "#ffffff");
+                countdown = 100;
+            }
+        });
+
+
+        drag(catsSVG);
+        zoom(catsSVG);
+        hint(catfound);
+        settingIconRotate();
+        RetryIconRotate();
+
+        // 計時器
         let i = 0;
         let timeover = 0;
-        while (i < 1000) {
+        let waitTime = 0;
+
+        while (i < 9999) {
             (function (i) {
                 setTimeout(function () {
                     if (countdown == 0) {
@@ -62,59 +125,68 @@ function catClick(svg) {
                         // }
                         timeover = 1;
                     }
+
+                    else if (retryFlag == 1) {
+                        // console.log("pause");
+                        printTimer(0);
+                        waitTime = i;
+                        // timeover = 1;
+                        waitTime++;
+                    }
+                    else if (pause == 1 || startFlag == 0) {
+                        // console.log("pause");
+                        waitTime++;
+                    }
                     else {
-                        printTimer(i);
-                        if (i == 5)
+                        printTimer(i - waitTime);
+                        if (i - waitTime == 5)
                             showHint();
-                        // document.getElementById("hintCombine").style.visibility = "visible";
                     }
                 }, 1000 * i)
             })(i++)
             if (timeover == 1)
                 break;
         }
-        drag(catsSVG);
-        zoom(catsSVG);
-        hint(catfound);
-        clickSetting();
     });
 }
-function clickSetting(){
-    let settingIcon= document.getElementById("settingIcon");
-    let settings = document.getElementById("settings");
-    settingIcon.addEventListener("click",function(){
-        settings.style.visibility="visible";
-        settings.setAttribute("class", "mainView slideIn animate__animated slide");
-    })
 
-}
+
 function showHint() {
     document.getElementById("hintCombine").style.visibility = "visible";
-    document.getElementById("hintCombine").setAttribute("class", "animateFadeInUp animate__animated");
+    document.getElementById("hintCombine").setAttribute("class", "animateFadeIn animate__animated  linear");
 }
 function printCountdown(countdown) {
-    let firsrtDigit = Math.floor(countdown / 100);
-    let secondDigit = Math.floor((countdown % 100) / 10);
-    let thirdDigit = Math.floor(countdown % 10);
+    if (countdown < 1000) {
+        let firsrtDigit = Math.floor(countdown / 100);
+        let secondDigit = Math.floor((countdown % 100) / 10);
+        let thirdDigit = Math.floor(countdown % 10);
 
-    let firsrtDigitImg = numImages(firsrtDigit);
-    let secondDigitImg = numImages(secondDigit);
-    let thirdDigitImg = numImages(thirdDigit);
-    document.getElementById("num1").setAttribute("src", firsrtDigitImg);
-    document.getElementById("num2").setAttribute("src", secondDigitImg);
-    document.getElementById("num3").setAttribute("src", thirdDigitImg);
+        let firsrtDigitImg = numImages(firsrtDigit);
+        let secondDigitImg = numImages(secondDigit);
+        let thirdDigitImg = numImages(thirdDigit);
+        document.getElementById("num1").setAttribute("src", firsrtDigitImg);
+        document.getElementById("num2").setAttribute("src", secondDigitImg);
+        document.getElementById("num3").setAttribute("src", thirdDigitImg);
+    }
 }
 function printTimer(time) {
-    let firsrtDigit = Math.floor(time / 100);
-    let secondDigit = Math.floor((time % 100) / 10);
-    let thirdDigit = Math.floor(time % 10);
+    if (time < 1000) {
+        let firsrtDigit = Math.floor(time / 100);
+        let secondDigit = Math.floor((time % 100) / 10);
+        let thirdDigit = Math.floor(time % 10);
 
-    let firsrtDigitImg = numImages(firsrtDigit);
-    let secondDigitImg = numImages(secondDigit);
-    let thirdDigitImg = numImages(thirdDigit);
-    document.getElementById("timer1").setAttribute("src", firsrtDigitImg);
-    document.getElementById("timer2").setAttribute("src", secondDigitImg);
-    document.getElementById("timer3").setAttribute("src", thirdDigitImg);
+        let firsrtDigitImg = numImages(firsrtDigit);
+        let secondDigitImg = numImages(secondDigit);
+        let thirdDigitImg = numImages(thirdDigit);
+        document.getElementById("timer1").setAttribute("src", firsrtDigitImg);
+        document.getElementById("timer2").setAttribute("src", secondDigitImg);
+        document.getElementById("timer3").setAttribute("src", thirdDigitImg);
+    }
+    else {
+        document.getElementById("timer1").setAttribute("src", "./images/num9.svg");
+        document.getElementById("timer2").setAttribute("src", "./images/num9.svg");
+        document.getElementById("timer3").setAttribute("src", "./images/num9.svg");
+    }
 }
 
 function numImages(num) {
@@ -282,7 +354,7 @@ function drag(catsSVG) {
     //drag 拖曳
     let moving;
     catsSVG.addEventListener("mousedown", function (e) {
-        catsSVG.style.cursor="grab";
+        catsSVG.style.cursor = "grab";
         moving = true;
     });
     catsSVG.addEventListener("mousemove", function (e) {
@@ -341,16 +413,23 @@ function drag(catsSVG) {
     });
     catsSVG.addEventListener("mouseup", function (e) {
         moving = false;
-        catsSVG.style.cursor="auto";
+        catsSVG.style.cursor = "auto";
     });
 }
 
-function settingRotate() {
-    temp = document.getElementById("settingIcon");
-    temp.addEventListener("mouseenter", function (e) {
-        temp.setAttribute("class", "rotateSetting animate__animated infinite");
+function settingIconRotate() {
+    settingIcon.addEventListener("mouseenter", function (e) {
+        settingIcon.setAttribute("class", "rotateSetting animate__animated faster  infinite linear");
     })
-    temp.addEventListener("mouseout", function (e) {
-        temp.setAttribute("class", "");
+    settingIcon.addEventListener("mouseout", function (e) {
+        settingIcon.setAttribute("class", "");
+    })
+}
+function RetryIconRotate() {
+    retryBtn.addEventListener("mouseenter", function (e) {
+        retryBtn.setAttribute("class", "rotateSetting animate__animated  faster infinite linear");
+    })
+    retryBtn.addEventListener("mouseout", function (e) {
+        retryBtn.setAttribute("class", "");
     })
 }

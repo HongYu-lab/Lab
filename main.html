@@ -13,6 +13,7 @@
 
     <script src="./catClick.js"></script>
     <link rel="stylesheet" href="./catCss.css">
+    <link rel="stylesheet" href="./animation.css">
     <style>
 
     </style>
@@ -20,8 +21,7 @@
 </head>
 
 
-<body style="background-color: aquamarine;">
-
+<body>
     <section style="position: absolute;">
         <div class="mainView">
             <object data="./images/catsSVG.svg" id="catsSVG" style="border-radius: 25px;"></object>
@@ -42,22 +42,48 @@
             <img id="settingIcon" src="./images/settingIcon.svg">
         </div>
     </section>
+    
+    <section style="position: absolute; ">
+        <div id="start">
+            <div id="startBackground">
+            </div>
+            <div id="startView">
+                <img id="logo" src="./images/Logo.svg">
+                <img id="startBtn" src="./images/startBtnIcon.svg">
+                <img id="title" src="./images/title.svg">
+                <a target="_blank" href="https://hackmd.io/@HongYu/ryaJXXrqR"> <img id="HackMDIcon"
+                        src="./images/HackMDIcon.svg">
+                </a>
+                <a target="_blank" href="https://github.com/HongYu-lab/Lab"><img id="gitIcon"
+                        src="./images/gitIcon.svg"></a>
+
+            </div>
+        </div>
+    </section>
 
     <section style="position: absolute;">
-        <div id="settings" class="mainView">
-            <div
-                style="width: 1850px;height: 900px; background-color: rgb(37, 150, 150);border-radius: 25px; opacity: 0.5; position: absolute; left: 0; top: 0;">
+        <div id="settings">
+            <div id="settingBackground">
             </div>
-            <div
-                style="position: absolute;width: 500px;height: 200px ;left: 300px;top:200px; background-color: rgb(108, 108, 219);">
+            <div id="settingView">
+                <img id="settingTitle" src="./images/settingTitle.svg">
+                <img id="closeBtn" src="./images/closeBtn.svg">
+                <img id="retryBtn" src="./images/retryBtn.svg">
+                <img id="SEIcon" src="./images/SEIcon.svg">
+                <img id="BGMIcon" src="./images/BGMIcon.svg">
+                <img id="volumeBar1" src="./images/volumeBar.svg">
+                <img id="volumeBar2" src="./images/volumeBar.svg">
+                <img id="soundIcon" src="./images/soundIcon.svg">
+                <img id="muteIcon" src="./images/muteIcon.svg">
             </div>
         </div>
     </section>
 
     <script>
         const svg = document.getElementById("catsSVG");
+
         catClick(svg);
-        settingRotate();
+        // settingRotate();
     </script>
 </body>
 

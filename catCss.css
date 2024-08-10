@@ -4,10 +4,6 @@ body {
     background-position: top right;
 }
 
-.invisible {
-    visibility: visible;
-}
-
 .mainView {
     position: absolute;
     left: 28px;
@@ -17,15 +13,8 @@ body {
     overflow: hidden;
 }
 
-.show {
-    visibility: visible;
-}
 
 #hintCombine {
-    visibility: hidden;
-}
-
-#settings {
     visibility: hidden;
 }
 
@@ -141,63 +130,198 @@ body {
     height: 80px;
 }
 
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate(0, 20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(0, 0);
-    }
+#settingBackground {
+    width: 1850px;
+    height: 900px;
+    background-color: black;
+    border-radius: 25px;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
-.animateFadeInUp {
-    animation-name: fadeInUp;
+#settings {
+    position: absolute;
+    left: 28px;
+    top: -937px;
+    width: 1850px;
+    height: 900px;
+    overflow: hidden;
 }
 
-.animate__animated {
-    animation-duration: 4s;
-    animation-fill-mode: both;
-    animation-timing-function: linear;
+#startBackground {
+    width: 1850px;
+    height: 900px;
+    background-color: black;
+    border-radius: 25px;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
-.animate__animated.slide {
-    animation-duration: 0.5s;
-}
-
-
-@keyframes rotate {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.rotateSetting {
-    animation-name: rotate;
-}
-
-.animate__animated.infinite {
-    animation-iteration-count: infinite;
+#startView {
+    border: 10px solid black;
+    width: 500px;
+    height: 700px;
+    background-color: #F5F5F5;
+    border-radius: 50px;
+    opacity: 1;
+    position: absolute;
+    left: 700px;
+    top: 100px;
 }
 
 
-.slideIn {
-    animation-name: slideDown;
+#start {
+    /* visibility: hidden; */
+    position: absolute;
+    left: 28px;
+    top: 13px;
+    width: 1850px;
+    height: 900px;
+    overflow: hidden;
 }
 
-@keyframes slideDown {
-    from {
-        transform: translate(0, -900px);
-    }
+#logo {
+    position: absolute;
+    width: 300px;
+    left: 120px;
+    top: 220px;
+}
 
-    to {
-        transform: translate(-0, 0);
-    }
+
+#startBtn:hover {
+    position: absolute;
+    width: 200px;
+    left: 160px;
+    top: 518px;
+    cursor: pointer;
+}
+
+#startBtn {
+    position: absolute;
+    width: 150px;
+    left: 185px;
+    top: 530px;
+}
+
+#title {
+    position: absolute;
+    width: 450px;
+    left: 40px;
+    top: 0px;
+}
+
+
+#settingView {
+    border: 10px solid black;
+    width: 500px;
+    height: 700px;
+    background-color: #F5F5F5;
+    border-radius: 50px;
+    opacity: 1;
+    position: absolute;
+    left: 700px;
+    top: 100px;
+}
+
+#closeBtn {
+    position: absolute;
+    width: 90px;
+    right: 190px;
+    bottom: 100px;
+    cursor: pointer;
+}
+#closeBtn:hover {
+    position: absolute;
+    width: 110px;
+    right: 180px;
+    bottom: 100px;
+    cursor: pointer;
+}
+
+#retryBtn:hover {
+    position: absolute;
+    width: 70px;
+    right: 22px;
+    bottom: 20px;
+    cursor: pointer;
+}
+
+#retryBtn {
+    position: absolute;
+    width: 60px;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}
+
+#SEIcon {
+    position: absolute;
+    width: 110px;
+    left: 35px;
+    top: 200px;
+}
+
+#BGMIcon {
+    position: absolute;
+    width: 140px;
+    left: 40px;
+    top: 340px;
+}
+
+
+#soundIcon {
+    position: absolute;
+    width: 45px;
+    right: 45px;
+    top: 255px;
+    cursor: pointer;
+}
+
+#muteIcon {
+    position: absolute;
+    width: 45px;
+    right: 45px;
+    top: 430px;
+    cursor: pointer;
+}
+
+#volumeBar1 {
+    position: absolute;
+    width: 300px;
+    left: 110px;
+    top: 250px;
+    cursor: pointer;
+}
+
+#volumeBar2 {
+    position: absolute;
+    width: 300px;
+    left: 110px;
+    top: 425px;
+    cursor: pointer;
+}
+
+#settingTitle {
+    position: absolute;
+    width: 450px;
+    right: 20px;
+    top: 30px;
+}
+
+#HackMDIcon {
+    position: absolute;
+    width: 80px;
+    left: 35px;
+    bottom: 10px;
+}
+
+#gitIcon {
+    position: absolute;
+    width: 80px;
+    left: 35px;
+    bottom: 50px;
 }
