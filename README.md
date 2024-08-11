@@ -10,4 +10,4 @@ https://hackmd.io/@HongYu/ryaJXXrqR
 
 提供100 cats與Box Cat Puzzle網址:     休閒殺時間好遊戲OvOb
 Box Cat Puzzle :https://store.steampowered.com/app/751980/Box_Cats_Puzzle/
-100 cats: https://store.steampowered.com/app/2667970/100_Asian_Cats/
+100 cats: https://store.steampowered.com/app/2845270/100_Aliens_Cats/
