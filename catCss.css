@@ -274,7 +274,7 @@ body {
 }
 
 
-#soundIcon {
+#sound1Icon {
     position: absolute;
     width: 45px;
     right: 45px;
@@ -282,7 +282,7 @@ body {
     cursor: pointer;
 }
 
-#muteIcon {
+#sound2Icon {
     position: absolute;
     width: 45px;
     right: 45px;

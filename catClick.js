@@ -12,20 +12,59 @@ function catClick(svg) {
         const startBackground = document.getElementById("startBackground");//開始背景
         const startView = document.getElementById("startView");//開始頁面中間的介面
         const cheatBtn = document.getElementById("cheatBtn");
+        const SEBtn = document.getElementById("sound1Icon");
+        const BGMBtn = document.getElementById("sound2Icon");
 
+
+        const catBGM = new Audio("./audio/catBGM.m4a");
+        const meow1 = new Audio("./audio/meow1.m4a");
+        const meow2 = new Audio("./audio/meow2.m4a");
+        const meow3 = new Audio("./audio/meow3.m4a");
+        const meow4 = new Audio("./audio/meow4.m4a");
+        const meow5 = new Audio("./audio/meow5.m4a");
+        const meow6 = new Audio("./audio/meow6.m4a");
 
         let countdown = 100;
         let pause = 0;
         let startFlag = 0;
         let retryFlag = 0;
+        let BGMFlag = 0;
+        let SEFlag = 0;
 
         // 開始按鈕
         startBtn.addEventListener("click", function () {
+            catBGM.play();
+            catBGM.loop = true;
             startFlag = 1;
             retryFlag = 0;
             start.setAttribute("class", "animateFadeOut animate__animated  linear faster");
             startView.setAttribute("class", "startOut animate__animated  linear slide");
         })
+        //BGM 靜音/播放
+        BGMBtn.addEventListener("click", function () {
+            if (BGMFlag == 0) {
+                catBGM.muted = true;
+                BGMFlag = 1;
+                BGMBtn.setAttribute("src", "./images/muteIcon.svg");
+            }
+            else {
+                catBGM.muted = false;
+                BGMFlag = 0;
+                BGMBtn.setAttribute("src", "./images/soundIcon.svg");
+            }
+        });
+        //SE 靜音/播放
+        SEBtn.addEventListener("click", function () {
+            if (SEFlag == 0) {
+                SEFlag = 1;
+                SEBtn.setAttribute("src", "./images/muteIcon.svg");
+            }
+            else {
+                SEFlag = 0;
+                SEBtn.setAttribute("src", "./images/soundIcon.svg");
+                console.log("456");
+            }
+        });
 
         //設定全部未點擊 clicked = 0
         for (let i = 0; i < catfound.length; i++) {
@@ -55,6 +94,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
+                    if (SEFlag == 0)
+                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
                     if (countdown == 0)
                         console.log("win!");
                     // console.log(countdown);
@@ -67,6 +108,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
+                    if (SEFlag == 0)
+                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
                     if (countdown == 0)
                         console.log("win!");
                     // console.log(countdown);
@@ -76,6 +119,8 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
+                    if (SEFlag == 0)
+                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
                     if (countdown == 0)
                         console.log("win!");
                     // console.log(countdown);
@@ -85,28 +130,25 @@ function catClick(svg) {
             });
         }
 
-
         //暫停點擊事件
         settingIcon.addEventListener("click", function () {
 
             settings.style.visibility = "visible";
             settings.setAttribute("class", "slideIn animate__animated slide linear");
             pause = 1;
-            // console.log(pause);
-
         });
         //設定關閉按鈕點擊事件
         closeBtn.addEventListener("click", function () {
             settings.setAttribute("class", "slideOut animate__animated slide  linear");
             pause = 0;
         });
-
         //設定重新遊玩事件 ==>將各個設定返回初始值
         retryBtn.addEventListener("click", function () {
             retryFlag = 1;
             startFlag = 0;
             pause = 0;
             countdown = 100;
+            catBGM.load();
             printCountdown(countdown);
             hintCombine.style.visibility = "hidden";
             hintCombine.setAttribute("class", "");
@@ -119,7 +161,6 @@ function catClick(svg) {
                 catfound[i].setAttribute("fill", "#ffffff");
             }
         });
-
 
         drag(catsSVG);
         zoom(catsSVG);
@@ -445,4 +486,20 @@ function RetryIconRotate() {
     retryBtn.addEventListener("mouseout", function (e) {
         retryBtn.setAttribute("class", "");
     })
+}
+
+function meowSound(meow1, meow2, meow3, meow4, meow5, meow6) {
+    let a = Math.floor((Math.random() * 10) % 6);
+    let elem;
+    switch (a) {
+        case 1: elem = meow1; break;
+        case 2: elem = meow2; break;
+        case 3: elem = meow3; break;
+        case 4: elem = meow4; break;
+        case 5: elem = meow5; break;
+        case 0: elem = meow6; break;
+        default: break;
+    }
+    elem.play();
+    console.log(a);
 }
