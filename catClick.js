@@ -144,6 +144,7 @@ function catClick(svg) {
         });
         //設定重新遊玩事件 ==>將各個設定返回初始值
         retryBtn.addEventListener("click", function () {
+            catsSVG.setAttribute("viewBox", "0.00 0.00 1440.00 1440.00");
             retryFlag = 1;
             startFlag = 0;
             pause = 0;
