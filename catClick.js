@@ -2,21 +2,23 @@ function catClick(svg) {
     svg.addEventListener("load", function () {
         const catfound = svg.contentDocument.querySelectorAll('[class^=catNum]');//used by clickEvent
         const catsSVG = svg.contentDocument.getElementById("catsSVG"); //used by drag and zoom
-        const hintCombine = document.getElementById("hintCombine");
+        const hintCombine = document.getElementById("hintCombine");//整個hint元件
         const settingIcon = document.getElementById("settingIcon");//開啟右上角"暫停(設定)"的按鍵
         const closeBtn = document.getElementById("closeBtn");//關閉"暫停(設定)"的按鍵
         const settings = document.getElementById("settings");//整個設定主體
         const startBtn = document.getElementById("startBtn"); //開始按鍵
         const start = document.getElementById("start");//整個開始頁面
         const retryBtn = document.getElementById("retryBtn");//重啟按鈕
-        const startBackground = document.getElementById("startBackground");//開始背景
+        const startBackground = document.getElementById("startBackground");//開始頁面背景
         const startView = document.getElementById("startView");//開始頁面中間的介面
-        const cheatBtn = document.getElementById("cheatBtn");
-        const SEBtn = document.getElementById("sound1Icon");
-        const BGMBtn = document.getElementById("sound2Icon");
-
+        const cheatBtn = document.getElementById("cheatBtn");//作弊skip按鈕
+        const SEBtn = document.getElementById("sound1Icon");//SE靜音/開啟按鍵
+        const BGMBtn = document.getElementById("sound2Icon");//BGM靜音/開啟按鍵
+        const completeOk = document.getElementById("completeOk");//完成畫面返回按鍵
+        const complete = document.getElementById("complete");//整個完成的彈出視窗
 
         const catBGM = new Audio("./audio/catBGM.m4a");
+        const completeSound = new Audio("./audio/completeSound.m4a");
         const meow1 = new Audio("./audio/meow1.m4a");
         const meow2 = new Audio("./audio/meow2.m4a");
         const meow3 = new Audio("./audio/meow3.m4a");
@@ -30,6 +32,7 @@ function catClick(svg) {
         let retryFlag = 0;
         let BGMFlag = 0;
         let SEFlag = 0;
+        let duration = 0;
 
         // 開始按鈕
         startBtn.addEventListener("click", function () {
@@ -62,9 +65,9 @@ function catClick(svg) {
             else {
                 SEFlag = 0;
                 SEBtn.setAttribute("src", "./images/soundIcon.svg");
-                console.log("456");
             }
         });
+
 
         //設定全部未點擊 clicked = 0
         for (let i = 0; i < catfound.length; i++) {
@@ -94,10 +97,17 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (SEFlag == 0)
-                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
-                    if (countdown == 0)
-                        console.log("win!");
+                    if (SEFlag == 0) {
+                        if (countdown == 0)
+                            completeSound.play();
+                        else
+                            meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
+                    }
+                    if (countdown == 0){
+                        complete.style.visibility="visible"
+                        printTime(duration);
+                        console.log(duration);
+                    }
                     // console.log(countdown);
                 }
                 else if ((hasTailClass(catfound[i]) == 1) && (catfound[i].getAttribute("clicked") != 1)) {
@@ -108,21 +118,35 @@ function catClick(svg) {
                     catfound[i].setAttribute("clicked", 1);
                     countdown -= 1;
                     printCountdown(countdown);
-                    if (SEFlag == 0)
+                    if (SEFlag == 0) {
+                        if (countdown == 0)
+                            completeSound.play();
+                        else
                         meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
-                    if (countdown == 0)
-                        console.log("win!");
-                    // console.log(countdown);
                 }
-                else if (catfound[i].getAttribute("clicked") != 1) {
-                    catfound[i].setAttribute("fill", randomColor());
-                    catfound[i].setAttribute("clicked", 1);
-                    countdown -= 1;
-                    printCountdown(countdown);
-                    if (SEFlag == 0)
-                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
+                if (countdown == 0){
+                    complete.style.visibility="visible"
+                    printTime(duration);
+                    console.log(duration);
+                }
+                // console.log(countdown);
+            }
+            else if (catfound[i].getAttribute("clicked") != 1) {
+                catfound[i].setAttribute("fill", randomColor());
+                catfound[i].setAttribute("clicked", 1);
+                countdown -= 1;
+                printCountdown(countdown);
+                if (SEFlag == 0) {
                     if (countdown == 0)
-                        console.log("win!");
+                            completeSound.play();
+                        else
+                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
+                }
+                if (countdown == 0){
+                        printTime(duration);
+                        complete.style.visibility="visible"
+                        console.log(duration);
+                    }
                     // console.log(countdown);
                 }
                 else
@@ -130,7 +154,7 @@ function catClick(svg) {
             });
         }
 
-        //暫停點擊事件
+        //右上角暫停按鈕點擊事件
         settingIcon.addEventListener("click", function () {
 
             settings.style.visibility = "visible";
@@ -162,13 +186,16 @@ function catClick(svg) {
                 catfound[i].setAttribute("fill", "#ffffff");
             }
         });
+        //設定完成畫面按鍵返回主畫面點擊事件
+        completeOk.addEventListener("click",function () {
+            complete.style.visibility="hidden";
+        });
 
         drag(catsSVG);
         zoom(catsSVG);
         hint(catfound);
         settingIconRotate();
         RetryIconRotate();
-
         // 計時器
         let i = 0;
         let timeover = 0;
@@ -180,7 +207,6 @@ function catClick(svg) {
                     if (countdown == 0) {
                         timeover = 1;
                     }
-
                     else if (retryFlag == 1) {
                         // console.log("pause");
                         printTimer(0);
@@ -193,8 +219,9 @@ function catClick(svg) {
                         waitTime++;
                     }
                     else {
-                        printTimer(i - waitTime);
-                        if (i - waitTime == 5)
+                        duration = i - waitTime;
+                        printTimer(duration);
+                        if (duration == 5)
                             showHint();
                     }
                 }, 1000 * i)
@@ -204,6 +231,7 @@ function catClick(svg) {
         }
     });
 }
+
 
 
 function showHint() {
@@ -243,6 +271,25 @@ function printTimer(time) {
         document.getElementById("timer3").setAttribute("src", "./images/num9.svg");
     }
 }
+function printTime(time) {
+    if (time < 1000) {
+        let firsrtDigit = Math.floor(time / 100);
+        let secondDigit = Math.floor((time % 100) / 10);
+        let thirdDigit = Math.floor(time % 10);
+
+        let firsrtDigitImg = numImages2(firsrtDigit);
+        let secondDigitImg = numImages2(secondDigit);
+        let thirdDigitImg = numImages2(thirdDigit);
+        document.getElementById("time1").setAttribute("src", firsrtDigitImg);
+        document.getElementById("time2").setAttribute("src", secondDigitImg);
+        document.getElementById("time3").setAttribute("src", thirdDigitImg);
+    }
+    else {
+        document.getElementById("time1").setAttribute("src", "./images/num9.svg");
+        document.getElementById("time2").setAttribute("src", "./images/num9.svg");
+        document.getElementById("time3").setAttribute("src", "./images/num9.svg");
+    }
+}
 
 function numImages(num) {
     let srcString = "";
@@ -257,6 +304,23 @@ function numImages(num) {
         case 3: srcString = "./images/num3.svg"; break;
         case 2: srcString = "./images/num2.svg"; break;
         case 1: srcString = "./images/num1.svg"; break;
+        default: break;
+    }
+    return srcString;
+}
+function numImages2(num) {
+    let srcString = "";
+    switch (num) {
+        case 0: srcString = "./images/num_0.svg"; break;
+        case 9: srcString = "./images/num_9.svg"; break;
+        case 8: srcString = "./images/num_8.svg"; break;
+        case 7: srcString = "./images/num_7.svg"; break;
+        case 6: srcString = "./images/num_6.svg"; break;
+        case 5: srcString = "./images/num_5.svg"; break;
+        case 4: srcString = "./images/num_4.svg"; break;
+        case 3: srcString = "./images/num_3.svg"; break;
+        case 2: srcString = "./images/num_2.svg"; break;
+        case 1: srcString = "./images/num_1.svg"; break;
         default: break;
     }
     return srcString;
@@ -340,17 +404,6 @@ function setClassAttribute(className, name, color) {
 }
 
 function randomColor() {
-    //  #FFEBA2 1~10
-    //  #31AE3D 11~20
-    //  #BAAFFF 21~30
-    //  #49EEF9 31~40
-    //  #F8B5F1 41~50
-    //  #8CFFC8 51~60
-    //  #BAC9FF 61~70
-    //  #FFA14A 71~80
-    //  #A3C3DA 81~90
-    //  #FFCBCB 91~100
-
     let a = Math.floor((Math.random() * 100) % 10);
     let color;
     switch (a) {
@@ -475,18 +528,18 @@ function drag(catsSVG) {
 function settingIconRotate() {
     settingIcon.addEventListener("mouseenter", function (e) {
         settingIcon.setAttribute("class", "rotateSetting animate__animated faster  infinite linear");
-    })
+    });
     settingIcon.addEventListener("mouseout", function (e) {
         settingIcon.setAttribute("class", "");
-    })
+    });
 }
 function RetryIconRotate() {
     retryBtn.addEventListener("mouseenter", function (e) {
         retryBtn.setAttribute("class", "rotateSetting animate__animated  faster infinite linear");
-    })
+    });
     retryBtn.addEventListener("mouseout", function (e) {
         retryBtn.setAttribute("class", "");
-    })
+    });
 }
 
 function meowSound(meow1, meow2, meow3, meow4, meow5, meow6) {
@@ -502,5 +555,4 @@ function meowSound(meow1, meow2, meow3, meow4, meow5, meow6) {
         default: break;
     }
     elem.play();
-    console.log(a);
 }

@@ -173,7 +173,6 @@ body {
     top: 100px;
 }
 
-
 #start {
     /* visibility: hidden; */
     position: absolute;
@@ -183,6 +182,40 @@ body {
     height: 900px;
     overflow: hidden;
 }
+
+#complete {
+    visibility: hidden;
+    position: absolute;
+    left: 28px;
+    top: 13px;
+    width: 1850px;
+    height: 900px;
+    overflow: hidden;
+}
+
+#completeView {
+    width: 1000px;
+    height: 500px;
+    background-color: #F5F5F5;
+    border-radius: 25px;
+    opacity: 1;
+    position: absolute;
+    left: 425px;
+    top: 200px;
+    overflow: hidden;
+}
+
+#completeBackground {
+    width: 1850px;
+    height: 900px;
+    background-color: black;
+    border-radius: 25px;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 
 #logo {
     position: absolute;
@@ -323,6 +356,22 @@ body {
     cursor: pointer;
 }
 
+#bugBtn {
+    position: absolute;
+    width: 60px;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+#bugBtn:hover {
+    position: absolute;
+    width: 70px;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
 
 #HackMDIcon {
     position: absolute;
@@ -336,4 +385,83 @@ body {
     width: 80px;
     left: 35px;
     bottom: 50px;
+}
+
+#completeTitle {
+    position: absolute;
+    width: 700px;
+    left: 150px;
+    top: 25px;
+}
+
+#completeOk {
+    position: absolute;
+    width: 100px;
+    left: 475px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+#completeOk:hover {
+    position: absolute;
+    width: 120px;
+    left: 470px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+
+#completeTime {
+    position: absolute;
+    width: 150px;
+    left: 150px;
+    top: 250px;
+    z-index: 2;
+}
+
+#completeSeconds {
+    position: absolute;
+    width: 150px;
+    right: 60px;
+    top: 250px;
+    z-index: 2;
+
+}
+
+#catPaw1 {
+    position: absolute;
+    width: 200px;
+    left: 130px;
+    bottom: 0px;
+    z-index: 0;
+}
+
+#catPaw2 {
+    position: absolute;
+    width: 300px;
+    right: -100px;
+    bottom: -15px;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+#time1 {
+    position: absolute;
+    width: 150px;
+    left: 300px;
+    bottom: 150px;
+}
+
+#time2 {
+    position: absolute;
+    width: 150px;
+    left: 450px;
+    bottom: 150px;
+}
+
+#time3 {
+    position: absolute;
+    width: 150px;
+    left: 600px;
+    bottom: 150px;
 }
