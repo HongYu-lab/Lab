@@ -373,6 +373,20 @@ body {
     cursor: pointer;
 }
 
+#meowIcon {
+    position: absolute;
+    width: 40px;
+    right: 5px;
+    top: 260px;
+    cursor: pointer;
+}
+#meowIcon:hover {
+    position: absolute;
+    width: 50px;
+    right: 0px;
+    top: 255px;
+    cursor: pointer;
+}
 
 #HackMDIcon {
     position: absolute;

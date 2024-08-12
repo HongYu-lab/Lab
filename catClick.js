@@ -19,6 +19,7 @@ function catClick(svg) {
         const complete = document.getElementById("complete");//整個完成的彈出視窗
         const volume1 = document.getElementById("volume1");
         const volume2 = document.getElementById("volume2");
+        const meowIcon = document.getElementById("meowIcon");
 
         const catBGM = new Audio("./audio/catBGM.m4a");
         const completeSound = new Audio("./audio/completeSound.m4a");
@@ -31,12 +32,12 @@ function catClick(svg) {
 
         let countdown = 100; //倒數
         let pause = 0; //是否按暫停
-        let startFlag = 0; 
-        let retryFlag = 0; 
+        let startFlag = 0;
+        let retryFlag = 0;
         let BGMFlag = 0;
         let SEFlag = 0;
         let duration = 0;
-        
+
         //初始化SE音量
         let meowVolume = 0.5;
         meow1.volume = 0.5;
@@ -98,6 +99,16 @@ function catClick(svg) {
                 catBGM.muted = false;
             }
         })
+        //新增喵叫測試按鈕
+        meowIcon.addEventListener("click", function () {
+            if (SEFlag == 0) {
+                n = volume1.value / 100;
+                meow4.volume = n;
+                meow4.play();
+            }
+        });
+
+        //SE音量圖案設定
         volume1.addEventListener("input", function () {
             let n = this.value;
             if (n == 0) {
