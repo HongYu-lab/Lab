@@ -6,6 +6,7 @@ function catClick(svg) {
         const settingIcon = document.getElementById("settingIcon");//開啟右上角"暫停(設定)"的按鍵
         const closeBtn = document.getElementById("closeBtn");//關閉"暫停(設定)"的按鍵
         const settings = document.getElementById("settings");//整個設定主體
+        const settingView = document.getElementById("settingView");//設定頁面
         const startBtn = document.getElementById("startBtn"); //開始按鍵
         const start = document.getElementById("start");//整個開始頁面
         const retryBtn = document.getElementById("retryBtn");//重啟按鈕
@@ -16,6 +17,8 @@ function catClick(svg) {
         const BGMBtn = document.getElementById("sound2Icon");//BGM靜音/開啟按鍵
         const completeOk = document.getElementById("completeOk");//完成畫面返回按鍵
         const complete = document.getElementById("complete");//整個完成的彈出視窗
+        const volume1 = document.getElementById("volume1");
+        const volume2 = document.getElementById("volume2");
 
         const catBGM = new Audio("./audio/catBGM.m4a");
         const completeSound = new Audio("./audio/completeSound.m4a");
@@ -26,16 +29,28 @@ function catClick(svg) {
         const meow5 = new Audio("./audio/meow5.m4a");
         const meow6 = new Audio("./audio/meow6.m4a");
 
-        let countdown = 100;
-        let pause = 0;
-        let startFlag = 0;
-        let retryFlag = 0;
+        let countdown = 100; //倒數
+        let pause = 0; //是否按暫停
+        let startFlag = 0; 
+        let retryFlag = 0; 
         let BGMFlag = 0;
         let SEFlag = 0;
         let duration = 0;
+        
+        //初始化SE音量
+        let meowVolume = 0.5;
+        meow1.volume = 0.5;
+        meow2.volume = 0.5;
+        meow3.volume = 0.5;
+        meow4.volume = 0.5;
+        meow5.volume = 0.5;
+        meow6.volume = 0.5;
+        completeSound.volume = 0.5;
+
 
         // 開始按鈕
         startBtn.addEventListener("click", function () {
+            catBGM.volume = 0.5;
             catBGM.play();
             catBGM.loop = true;
             startFlag = 1;
@@ -67,8 +82,33 @@ function catClick(svg) {
                 SEBtn.setAttribute("src", "./images/soundIcon.svg");
             }
         });
-
-
+        //BGM 音量條
+        volume2.addEventListener("input", function () {
+            let n = this.value;
+            let percent = n / 100;
+            catBGM.volume = percent;
+            if (percent == 0) {
+                BGMBtn.setAttribute("src", "./images/muteIcon.svg");
+                BGMFlag = 1;
+                catBGM.muted = true;
+            }
+            else {
+                BGMBtn.setAttribute("src", "./images/soundIcon.svg");
+                BGMFlag = 0;
+                catBGM.muted = false;
+            }
+        })
+        volume1.addEventListener("input", function () {
+            let n = this.value;
+            if (n == 0) {
+                SEBtn.setAttribute("src", "./images/muteIcon.svg");
+                SEFlag = 1;
+            }
+            else {
+                SEBtn.setAttribute("src", "./images/soundIcon.svg");
+                SEFlag = 0;
+            }
+        })
         //設定全部未點擊 clicked = 0
         for (let i = 0; i < catfound.length; i++) {
             catfound[i].setAttribute("clicked", "0");
@@ -100,13 +140,16 @@ function catClick(svg) {
                     if (SEFlag == 0) {
                         if (countdown == 0)
                             completeSound.play();
-                        else
-                            meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
+                        else {
+                            meowVolume = volume1.value / 100;
+                            meowSound(meow1, meow2, meow3, meow4, meow5, meow6, meowVolume);
+                            // console.log(meowVolume);
+                        }
                     }
-                    if (countdown == 0){
-                        complete.style.visibility="visible"
+                    if (countdown == 0) {
+                        complete.style.visibility = "visible"
                         printTime(duration);
-                        console.log(duration);
+                        // console.log(duration);
                     }
                     // console.log(countdown);
                 }
@@ -121,31 +164,37 @@ function catClick(svg) {
                     if (SEFlag == 0) {
                         if (countdown == 0)
                             completeSound.play();
-                        else
-                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
-                }
-                if (countdown == 0){
-                    complete.style.visibility="visible"
-                    printTime(duration);
-                    console.log(duration);
-                }
-                // console.log(countdown);
-            }
-            else if (catfound[i].getAttribute("clicked") != 1) {
-                catfound[i].setAttribute("fill", randomColor());
-                catfound[i].setAttribute("clicked", 1);
-                countdown -= 1;
-                printCountdown(countdown);
-                if (SEFlag == 0) {
-                    if (countdown == 0)
-                            completeSound.play();
-                        else
-                        meowSound(meow1, meow2, meow3, meow4, meow5, meow6);
-                }
-                if (countdown == 0){
+                        else {
+                            meowVolume = volume1.value / 100;
+                            meowSound(meow1, meow2, meow3, meow4, meow5, meow6, meowVolume);
+                            // console.log(meowVolume);
+                        }
+                    }
+                    if (countdown == 0) {
+                        complete.style.visibility = "visible"
                         printTime(duration);
-                        complete.style.visibility="visible"
-                        console.log(duration);
+                        // console.log(duration);
+                    }
+                    // console.log(countdown);
+                }
+                else if (catfound[i].getAttribute("clicked") != 1) {
+                    catfound[i].setAttribute("fill", randomColor());
+                    catfound[i].setAttribute("clicked", 1);
+                    countdown -= 1;
+                    printCountdown(countdown);
+                    if (SEFlag == 0) {
+                        if (countdown == 0)
+                            completeSound.play();
+                        else {
+                            meowVolume = volume1.value / 100;
+                            meowSound(meow1, meow2, meow3, meow4, meow5, meow6, meowVolume);
+                            console.log(meowVolume);
+                        }
+                    }
+                    if (countdown == 0) {
+                        printTime(duration);
+                        complete.style.visibility = "visible"
+                        // console.log(duration);
                     }
                     // console.log(countdown);
                 }
@@ -187,8 +236,8 @@ function catClick(svg) {
             }
         });
         //設定完成畫面按鍵返回主畫面點擊事件
-        completeOk.addEventListener("click",function () {
-            complete.style.visibility="hidden";
+        completeOk.addEventListener("click", function () {
+            complete.style.visibility = "hidden";
         });
 
         drag(catsSVG);
@@ -542,7 +591,7 @@ function RetryIconRotate() {
     });
 }
 
-function meowSound(meow1, meow2, meow3, meow4, meow5, meow6) {
+function meowSound(meow1, meow2, meow3, meow4, meow5, meow6, meowVolume) {
     let a = Math.floor((Math.random() * 10) % 6);
     let elem;
     switch (a) {
@@ -554,5 +603,7 @@ function meowSound(meow1, meow2, meow3, meow4, meow5, meow6) {
         case 0: elem = meow6; break;
         default: break;
     }
+    elem.volume = meowVolume;
+    console.log(meowVolume);
     elem.play();
 }

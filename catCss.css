@@ -324,17 +324,18 @@ body {
 }
 
 
-#volumeBar1 {
+#volume1 {
     position: absolute;
-    width: 300px;
+    width: 290px;
+    height: 60px;
     left: 110px;
     top: 250px;
     cursor: pointer;
 }
-
-#volumeBar2 {
+#volume2 {
     position: absolute;
-    width: 300px;
+    width: 290px;
+    height: 60px;
     left: 110px;
     top: 425px;
     cursor: pointer;
