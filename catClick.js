@@ -490,15 +490,6 @@ function zoom(catsSVG) {
             .getAttribute("viewBox")
             .split(" ")
             .map((n) => parseFloat(n));
-        // 2.1 取得滑鼠座標
-        let startClient = {
-            x: e.clientX,
-            y: e.clientY,
-        };
-        //  3. 計算對應回去的 SVG 座標值
-        let newSVGPoint = catsSVG.createSVGPoint();
-        newSVGPoint.x = startClient.x;
-        newSVGPoint.y = startClient.y;
         //縮放 r 倍
         let r;
         if (e.deltaY > 0) {
